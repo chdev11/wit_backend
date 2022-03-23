@@ -1,4 +1,4 @@
-package org.example.rest.enums;
+package org.example.shared.enums;
 
 public enum MathType {
     SUM,

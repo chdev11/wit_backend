@@ -2,7 +2,7 @@ package org.example.shared.amqp.implementation;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.example.rest.entities.MathAction;
+import org.example.shared.entities.MathAction;
 import org.example.shared.amqp.interfaces.IAmqpServer;
 import org.example.shared.entities.AmqpResponse;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -29,6 +29,9 @@ public class AmqpServer implements IAmqpServer {
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();
         Gson gson = builder.create();
-        return (AmqpResponse) rabbitTemplate.convertSendAndReceive(queueName, gson.toJson(data));
+
+        String response = (String) rabbitTemplate.convertSendAndReceive(queueName, gson.toJson(data));
+
+        return gson.fromJson(response, AmqpResponse.class);
     }
 }

@@ -2,8 +2,8 @@ package org.example.rest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.example.rest.entities.MathAction;
-import org.example.rest.enums.MathType;
+import org.example.shared.enums.MathType;
+import org.example.shared.entities.MathAction;
 import org.example.shared.amqp.implementation.AmqpServer;
 import org.example.shared.entities.AmqpResponse;
 import org.slf4j.MDC;
@@ -27,7 +27,7 @@ public class RequestController {
     private AmqpServer server;
 
     public ResponseEntity<Object> createAction(MathAction action) {
-        if(action.a == null || action.b == null) {
+        if (action.a == null || action.b == null) {
             String errorMessage = "Error on create a Math action. A or B value are null.";
             log.error(errorMessage);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.singletonMap("error", errorMessage));
@@ -37,9 +37,9 @@ public class RequestController {
         action.setTransactionId(uuid);
         MDC.put("request-id", uuid);
 
-        log.info("[" + action.type.name() + "]: Transaction ID: " + MDC.get("request-id") + ". Operation: "+ action.a + " and " + action.b);
+        log.info("[" + action.type.name() + "]: Transaction ID: " + MDC.get("request-id") + ". Operation: " + action.a + " and " + action.b);
         AmqpResponse response = server.sendMessage(action);
-        if(response == null) {
+        if (response == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.singletonMap("error", "Error to connect with Calculator service."));
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(Collections.singletonMap("result", response.result));

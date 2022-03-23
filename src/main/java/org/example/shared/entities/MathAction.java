@@ -1,6 +1,6 @@
-package org.example.rest.entities;
+package org.example.shared.entities;
 
-import org.example.rest.enums.MathType;
+import org.example.shared.enums.MathType;
 
 import java.math.BigDecimal;
 

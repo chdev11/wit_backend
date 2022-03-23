@@ -1,0 +1,17 @@
+org/example/CalculatorApplication.java
+ org.example.CalculatorApplication
+org/example/services/CalculatorService.java
+ org.example.services.CalculatorService
+ org.example.services.CalculatorService$1
+org/example/shared/amqp/implementation/AmqpServer.java
+ org.example.shared.amqp.implementation.AmqpServer
+org/example/shared/enums/MathType.java
+ org.example.shared.enums.MathType
+org/example/shared/entities/MathAction.java
+ org.example.shared.entities.MathAction
+org/example/shared/entities/AmqpResponse.java
+ org.example.shared.entities.AmqpResponse
+org/example/shared/amqp/AmqpConfiguration.java
+ org.example.shared.amqp.AmqpConfiguration
+org/example/shared/amqp/interfaces/IAmqpServer.java
+ org.example.shared.amqp.interfaces.IAmqpServer
