@@ -1,14 +1,16 @@
 package org.example.shared.amqp.implementation;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.example.rest.entities.MathAction;
 import org.example.shared.amqp.interfaces.IAmqpServer;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageProperties;
+import org.example.shared.entities.AmqpResponse;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
-
+@Component
 public class AmqpServer implements IAmqpServer {
 
     @Autowired
@@ -23,11 +25,10 @@ public class AmqpServer implements IAmqpServer {
     }
 
     @Override
-    public void sendMessage(String data) {
-        MessageProperties messageProperties = new MessageProperties();
-        //TODO: create UUID generator
-        messageProperties.setHeader("request-id", "");
-        Message message = new Message(data.getBytes(StandardCharsets.UTF_8), messageProperties);
-        System.out.println("response: " + rabbitTemplate.convertSendAndReceive(queueName, message));
+    public AmqpResponse sendMessage(MathAction data) {
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
+        return (AmqpResponse) rabbitTemplate.convertSendAndReceive(queueName, gson.toJson(data));
     }
 }

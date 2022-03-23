@@ -1,0 +1,16 @@
+org/example/rest/enums/MathType.java
+ org.example.rest.enums.MathType
+org/example/WitApplication.java
+ org.example.WitApplication
+org/example/shared/amqp/AmqpConfiguration.java
+ org.example.shared.amqp.AmqpConfiguration
+org/example/shared/entities/AmqpResponse.java
+ org.example.shared.entities.AmqpResponse
+org/example/rest/RequestController.java
+ org.example.rest.RequestController
+org/example/shared/amqp/implementation/AmqpServer.java
+ org.example.shared.amqp.implementation.AmqpServer
+org/example/rest/entities/MathAction.java
+ org.example.rest.entities.MathAction
+org/example/shared/amqp/interfaces/IAmqpServer.java
+ org.example.shared.amqp.interfaces.IAmqpServer
